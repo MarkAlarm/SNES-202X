@@ -1,0 +1,2 @@
+template_irq:
+	RTL

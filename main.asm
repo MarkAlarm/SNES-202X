@@ -1,0 +1,105 @@
+optimize dp always
+optimize address mirrors
+math pri on
+lorom
+
+padbyte $00
+
+; defines, registers, etc (dummy org)
+org $008000
+	incsrc "registers/apu.asm"
+	incsrc "registers/cpu.asm"
+	incsrc "registers/dma.asm"
+	incsrc "registers/dsp.asm"
+	incsrc "registers/ppu.asm"
+	incsrc "registers/spc.asm"
+	incsrc "registers/wram.asm"
+	
+	incsrc "defines/global_ram_map.asm"
+	
+	incsrc "macros/snes.asm"
+	incsrc "macros/spc.asm"
+	incsrc "macros/misc.asm"
+
+; SNES header and initial vector pointers
+org $008000
+	incsrc "asm/vectors/brk_init.asm"
+	incsrc "asm/vectors/cop_init.asm"
+	incsrc "asm/vectors/irq_init.asm"
+	incsrc "asm/vectors/nmi_init.asm"
+	incsrc "asm/vectors/nmi_main.asm"
+	incsrc "asm/vectors/reset_init.asm"
+	incsrc "asm/vectors/reset_main.asm"
+	
+	incsrc "asm/engine.asm"
+	incsrc "asm/fixed_bytes.asm"
+	
+	incsrc "asm/header.asm"
+	
+	print "Last byte in bank 0: ",pc
+
+; graphics and palettes
+org $018000
+	font_generic: incbin "graphics/fonts/generic.bin"
+	sprites_generic: incbin "graphics/sprites/generic.bin"
+	
+	collision_tileset: incbin "graphics/collision/tileset.bin"
+	collision_sprites: incbin "graphics/collision/sprites.bin"
+	
+	smw_palette: incbin "palettes/smw.mw3"
+	
+	print "Last byte in bank 1: ",pc
+	
+	pad $01FFFF
+
+; various code demos
+org $028000
+	incsrc "asm/demos/menu/menu.asm"
+	
+	incsrc "asm/demos/collision/collision.asm"
+	incsrc "asm/demos/dual_controllers/dual_controllers.asm"
+	incsrc "asm/demos/four_controllers/four_controllers.asm"
+	incsrc "asm/demos/font_test/font_test.asm"
+	
+	print "Last byte in bank 2: ",pc
+
+	pad $02FFFF
+	
+org $038000
+	pad $03FFFF
+	
+org $048000
+	pad $04FFFF
+	
+org $058000
+	pad $05FFFF
+	
+org $068000
+	pad $06FFFF
+	
+org $078000
+	pad $07FFFF
+	
+org $088000
+	pad $08FFFF
+	
+org $098000
+	pad $09FFFF
+	
+org $0A8000
+	pad $0AFFFF
+
+org $0B8000
+	pad $0BFFFF
+	
+org $0C8000
+	pad $0CFFFF
+	
+org $0D8000
+	pad $0DFFFF
+	
+org $0E8000
+	pad $0EFFFF
+	
+org $0F8000
+	pad $0FFFFF
