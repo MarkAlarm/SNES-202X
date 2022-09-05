@@ -10,7 +10,6 @@ incsrc "defines.asm"
 
 table "defines/font_generic_table.txt"
 incsrc "init.asm"
-cleartable
 
 ;########;
 ;# Main #;
@@ -23,3 +22,4 @@ incsrc "main.asm"
 ;#######;
 
 incsrc "nmi.asm"
+cleartable

@@ -138,4 +138,6 @@ menu_main:
 	dl stardew_clock_init,menu_main
 	dl menu_main,menu_main
 	dl menu_main,menu_main
+	dl menu_main,menu_main
+	dl menu_main,menu_main
 	dl menu_main,null_pointer
