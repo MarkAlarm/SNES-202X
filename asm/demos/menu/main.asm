@@ -6,10 +6,10 @@ menu_main:
 	; use dpad to select an option
 	LDA !menu_current_option
 	STA !menu_previous_option
-	AND #$08
+	AND #$01
 	STA !scratch_0
 	LDA !menu_previous_option
-	AND #$07
+	AND #$0E
 	STA !scratch_1
 
 	LDA controller[0].low_pressed
@@ -19,7 +19,7 @@ menu_main:
 	BEQ +
 	
 	LDA !scratch_0
-	EOR #$08
+	EOR #$01
 	STA !scratch_0
 	
 	+
@@ -33,15 +33,15 @@ menu_main:
 	BEQ +
 
 	LDA !scratch_1
-	INC
-	AND #$07
+	CLC : ADC #$02
+	AND #$0E
 	STA !scratch_1
 	BRA ++
 	
 	+
 	LDA !scratch_1
-	DEC
-	AND #$07
+	SEC : SBC #$02
+	AND #$0E
 	STA !scratch_1
 	
 	++
@@ -125,15 +125,17 @@ menu_main:
 	RTL
 
 .option_offset_bottom
-	dw $0100,$0140,$0180,$01C0,$0200,$0240,$0280,$02C0
-	dw $0120,$0160,$01A0,$01E0,$0220,$0260,$02A0,$02E0
+	dw $0100,$0120,$0140,$0160,$0180,$01A0,$01C0,$01E0
+	dw $0200,$0220,$0240,$0260,$0280,$02A0,$02C0,$02E0
 
 .option_offset_top
-	dw $011F,$015F,$019F,$01DF,$021F,$025F,$029F,$02DF
-	dw $013F,$017F,$01BF,$01FF,$023F,$027F,$02BF,$02FF
+	dw $011F,$013F,$015F,$017F,$019F,$01BF,$01DF,$01FF
+	dw $021F,$023F,$025F,$027F,$029F,$02BF,$02DF,$02FF
 	
 .option_main_pointers
-	dl collision_init,dual_controllers_init,four_controllers_init,font_test_init
-	dl menu_main,menu_main,menu_main,menu_main
-	dl menu_main,menu_main,menu_main,menu_main
-	dl menu_main,menu_main,menu_main,null_pointer
+	dl collision_init,dual_controllers_init
+	dl font_test_init,four_controllers_init
+	dl stardew_clock_init,menu_main
+	dl menu_main,menu_main
+	dl menu_main,menu_main
+	dl menu_main,null_pointer

@@ -23,6 +23,8 @@ org $008000
 
 ; SNES header and initial vector pointers
 org $008000
+	reset bytes
+	
 	incsrc "asm/vectors/brk_init.asm"
 	incsrc "asm/vectors/cop_init.asm"
 	incsrc "asm/vectors/irq_init.asm"
@@ -34,12 +36,14 @@ org $008000
 	incsrc "asm/engine.asm"
 	incsrc "asm/fixed_bytes.asm"
 	
-	incsrc "asm/header.asm"
+	print "Bytes inserted in bank 0: ", bytes, "/32768"
 	
-	print "Last byte in bank 0: ",pc
+	incsrc "asm/header.asm"
 
 ; graphics and palettes
 org $018000
+	reset bytes
+	
 	font_generic: incbin "graphics/fonts/generic.bin"
 	sprites_generic: incbin "graphics/sprites/generic.bin"
 	
@@ -48,24 +52,31 @@ org $018000
 	
 	smw_palette: incbin "palettes/smw.mw3"
 	
-	print "Last byte in bank 1: ",pc
+	print "Bytes inserted in bank 1: ", bytes, "/32768"
 	
 	pad $01FFFF
 
 ; various code demos
 org $028000
+	reset bytes
+	
 	incsrc "asm/demos/menu/menu.asm"
 	
 	incsrc "asm/demos/collision/collision.asm"
 	incsrc "asm/demos/dual_controllers/dual_controllers.asm"
 	incsrc "asm/demos/four_controllers/four_controllers.asm"
 	incsrc "asm/demos/font_test/font_test.asm"
+	incsrc "asm/demos/stardew_clock/stardew_clock.asm"
 	
-	print "Last byte in bank 2: ",pc
-
+	print "Bytes inserted in bank 2: ", bytes, "/32768"
+	
 	pad $02FFFF
 	
 org $038000
+	reset bytes
+	
+	print "Bytes inserted in bank 3: ", bytes, "/32768"
+	
 	pad $03FFFF
 	
 org $048000

@@ -34,7 +34,7 @@ template_init:
 	
 	; put the main address here
 	%set_pointer_rom(!main_pointer,template_main)
-	%set_pointer_rom(!main_pointer,template_nmi)
+	%set_pointer_rom(!nmi_pointer,template_nmi)
 	
 	LDA #$0F
 	STA PPU.screen
