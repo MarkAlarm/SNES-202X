@@ -14,5 +14,8 @@ engine:
 	STZ !nmi_done
 	JMP engine
 
+empty_pointer:
+	RTL
+
 null_pointer:
 	STP

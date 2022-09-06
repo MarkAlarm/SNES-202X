@@ -125,7 +125,7 @@ menu_nmi:
 	dw ..collision_description,..dual_controllers_description
 	dw ..font_test_description,..four_controllers_description
 	dw ..stardew_clock_description,..inventory_description
-	dw ..unused_option_description,..unused_option_description
+	dw ..gfx_demo_1_description,..unused_option_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..unused_option_description
@@ -165,16 +165,22 @@ menu_nmi:
 	dw " Placeholder for an inventory   "
 	dw " system, will probably take     "
 	dw " inspiration from Pokemon or    "
-	dw " Minecraft.                     "
+	dw " Minecraft.              [TODO] "
+	
+..gfx_demo_1_description
+	dw " Graphics demo that uses 4BPP   "
+	dw " color and 8x8 tiles. This also "
+	dw " includes some basic tile       "
+	dw " animations.             [TODO] "
 	
 ..unused_option_description
 	dw " An unused option that as of    "
 	dw " right now, does nothing.       "
-	dw " Selecting this will leave you  "
-	dw " in this menu.                  "
+	dw " Selecting this will just reset "
+	dw " the menu state.                "
 	
 ..null_description
 	dw " An intentional option that     "
 	dw " freezes this menu by setting   "
-	dw " the engine's main pointer to a "
-	dw " null/empty routine.            "
+	dw " the main pointer to a null     "
+	dw " routine, executing an STP.     "

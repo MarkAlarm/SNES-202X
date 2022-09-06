@@ -120,6 +120,8 @@ menu_main:
 	STA !scratch_2
 	
 	%set_pointer_ram(!main_pointer,!scratch_0)
+	%set_pointer_rom(!nmi_pointer,empty_pointer)
+	%set_pointer_rom(!irq_pointer,empty_pointer)
 
 	PLB
 	RTL
@@ -135,9 +137,9 @@ menu_main:
 .option_main_pointers
 	dl collision_init,dual_controllers_init
 	dl font_test_init,four_controllers_init
-	dl stardew_clock_init,menu_main
-	dl menu_main,menu_main
-	dl menu_main,menu_main
-	dl menu_main,menu_main
-	dl menu_main,menu_main
-	dl menu_main,null_pointer
+	dl stardew_clock_init,menu_init
+	dl menu_init,menu_init
+	dl menu_init,menu_init
+	dl menu_init,menu_init
+	dl menu_init,menu_init
+	dl menu_init,null_pointer

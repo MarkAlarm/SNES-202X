@@ -84,8 +84,8 @@ reset_main:
 	%oam_clear()
 	
 	%set_pointer_rom(!main_pointer,menu_init)
-	%set_pointer_rom(!nmi_pointer,null_pointer)
-	%set_pointer_rom(!irq_pointer,null_pointer)
+	%set_pointer_rom(!nmi_pointer,empty_pointer)
+	%set_pointer_rom(!irq_pointer,empty_pointer)
 	
 	SEP #$30	
 	
