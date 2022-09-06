@@ -15,4 +15,4 @@ engine:
 	JMP engine
 
 null_pointer:
-	RTL
+	STP

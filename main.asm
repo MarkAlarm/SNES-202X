@@ -44,8 +44,7 @@ org $008000
 org $018000
 	reset bytes
 	
-	font_generic: incbin "graphics/fonts/generic.bin"
-	sprites_generic: incbin "graphics/sprites/generic.bin"
+	font_generic: incbin "graphics/global/fonts/generic.bin"
 	
 	collision_tileset: incbin "graphics/collision/tileset.bin"
 	collision_sprites: incbin "graphics/collision/sprites.bin"

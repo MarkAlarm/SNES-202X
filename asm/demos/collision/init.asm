@@ -39,10 +39,10 @@ collision_init:
 	%wram_write(.init_fg_collision,!collision_interaction_table,!collision_map_size,0)
 	
 	%vram_fill($00,$0000,$0000,0)
-	%vram_write(collision_tileset,$0000,$1000,0)
+	%upload_4bpp_gfx(collision_tileset,$0000)
 	%vram_write(.init_fg_tilemap,$3000,$0700,0)
-	%vram_write(collision_sprites,$6000,$1000,0)
-	%cgram_write(smw_palette,$00,$0200,0)
+	%upload_4bpp_gfx(collision_sprites,$6000)
+	%upload_palette(smw_palette)
 	%oam_clear()
 	%oam_mirror_clear()
 	

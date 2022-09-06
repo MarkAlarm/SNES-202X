@@ -26,7 +26,7 @@ stardew_clock_init:
 	STA PPU.sub_screen
 	
 	; initialize graphics
-	%vram_write(font_generic,$3000,$0800,0)
+	%upload_2bpp_gfx(font_generic,$3000)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
@@ -87,15 +87,23 @@ stardew_clock_init:
 	dw "                                "
 	dw "                                "
 	dw "                                "
-	dw " </> = dec/inc tick rate        "
-	dw " ^/v = double/halve tick rate   "
-	dw " A = reset tick rate            "
+	dw " Press start to return to the   "
+	dw " main menu.                     "
 	dw "                                "
-	dw " L/R = change weather [TODO]    "
 	dw "                                "
-	dw " Select = pause [TODO]          "
-	dw " Start = return to main menu    "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
 	dw "                                "
 	dw "                                "
 	dw "                                "
 	
+	; dw " </> = dec/inc tick rate        "
+	; dw " ^/v = double/halve tick rate   "
+	; dw " A = reset tick rate            "
+	; dw "                                "
+	; dw " L/R = change weather [TODO]    "
+	; dw "                                "
+	; dw " Select = pause [TODO]          "
+	; dw " Start = return to main menu    "

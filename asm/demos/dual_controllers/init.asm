@@ -35,6 +35,8 @@ dual_controllers_init:
 	LDA #$5D
 	STA PPU.cgram_data
 	
+	%vram_fill($00,$0000,$0000,0)
+	%upload_2bpp_gfx(font_generic,$3000)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%set_pointer_rom(!main_pointer,dual_controllers_main)

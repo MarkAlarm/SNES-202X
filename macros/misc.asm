@@ -23,3 +23,15 @@ macro set_pointer_ram(pointer, destaddr)
 	
 	PLP
 endmacro
+
+macro upload_2bpp_gfx(source, destaddr)
+	%vram_write(<source>,<destaddr>,$0800,0)
+endmacro
+
+macro upload_4bpp_gfx(source, destaddr)
+	%vram_write(<source>,<destaddr>,$1000,0)
+endmacro
+
+macro upload_palette(source)
+	%cgram_write(<source>,$00,$0200,0)
+endmacro

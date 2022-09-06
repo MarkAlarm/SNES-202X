@@ -32,7 +32,7 @@ menu_init:
 	STZ !menu_current_option
 	STZ !menu_previous_option
 	
-	%vram_write(font_generic,$3000,$0800,0)
+	%upload_2bpp_gfx(font_generic,$3000)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
@@ -55,7 +55,7 @@ menu_init:
 	dw " > Collision     > 2 Controllers"
 	dw " > Font Test     > 4 Controllers"
 	dw " > Stardew Clock > Invtry [TODO]"
-	dw " > Option 7      > Option 8     "
+	dw " > GFX Demo      > Option 8     "
 	dw " > Option 9      > Option 10    "
 	dw " > Option 11     > Option 12    "
 	dw " > Option 13     > Option 14    "
