@@ -44,12 +44,16 @@ org $008000
 org $018000
 	reset bytes
 	
-	font_generic: incbin "graphics/global/fonts/generic.bin"
+	generic_font: incbin "graphics/global/fonts/generic.bin"
 	
 	collision_tileset: incbin "graphics/collision/tileset.bin"
 	collision_sprites: incbin "graphics/collision/sprites.bin"
 	
+	gfx_demo_1_tileset: incbin "graphics/gfx_demo_1/tileset.bin"
+	gfx_demo_1_player: incbin "graphics/gfx_demo_1/player.bin"
+	
 	smw_palette: incbin "palettes/smw.mw3"
+	generic_palette: incbin "palettes/generic.mw3"
 	
 	print "Bytes inserted in bank 1: ", bytes, "/32768"
 	

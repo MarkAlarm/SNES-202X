@@ -32,7 +32,7 @@ menu_init:
 	STZ !menu_current_option
 	STZ !menu_previous_option
 	
-	%upload_2bpp_gfx(font_generic,$3000)
+	%upload_2bpp_gfx(generic_font,$3000)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)

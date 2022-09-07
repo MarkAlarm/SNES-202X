@@ -9,5 +9,5 @@ set cur_sec=%time:~6,2%
 set now=%cur_year%%cur_month%%cur_day%_time_%cur_hour%%cur_min%%cur_sec%
 copy "202X.sfc" "Backups/202X_%now%.sfc"
 
-"tools/asar.exe" main.asm 202X.sfc
+"tools/asar.exe" 202X.asm 202X.sfc
 pause

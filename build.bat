@@ -1,3 +1,3 @@
 @echo off
-"tools/asar.exe" main.asm 202X.sfc
+"tools/asar.exe" 202X.asm 202X.sfc
 pause
