@@ -1,0 +1,8 @@
+I may write my own tools for this project; those will be left in the tools folder as they are my own work.
+Other tools will not be included, though I will include links to anything that I do use.
+
+If you want to build the ROM, put the below build of asar.exe into this folder.
+https://github.com/RPGHacker/asar/releases/tag/v1.81
+
+I used M1TE2 to generate .map files, which can be found here below.
+https://github.com/nesdoug/M1TE2
