@@ -70,6 +70,7 @@ org $028000
 	incsrc "asm/demos/four_controllers/four_controllers.asm"
 	incsrc "asm/demos/font_test/font_test.asm"
 	incsrc "asm/demos/stardew_clock/stardew_clock.asm"
+	incsrc "asm/demos/gfx_demo_1/gfx_demo_1.asm"
 	
 	print "Bytes inserted in bank 2: ", bytes, "/32768"
 	
