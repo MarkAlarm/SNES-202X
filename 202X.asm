@@ -51,6 +51,7 @@ org $018000
 	
 	gfx_demo_1_tileset: incbin "graphics/gfx_demo_1/tileset.bin"
 	gfx_demo_1_player: incbin "graphics/gfx_demo_1/player.bin"
+	gfx_demo_1_water_anim: incbin "graphics/gfx_demo_1/water.bin"
 	
 	smw_palette: incbin "palettes/smw.mw3"
 	generic_palette: incbin "palettes/generic.mw3"
