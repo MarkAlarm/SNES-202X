@@ -1,4 +1,4 @@
-template_init:
+init:
 	; get rid of the comments after copy/pasted
 	STZ CPU.interrupt_enable
 	LDA #$8F
@@ -29,12 +29,13 @@ template_init:
 	STA PPU.sub_screen
 	
 	; insert any other init stuff here
-	
-	
+	%vram_fill($00,$0000,$0000,0)
+	%cgram_fill($00,$00,$0200,0)
 	
 	; put the main address here
-	%set_pointer_rom(!main_pointer,template_main)
-	%set_pointer_rom(!nmi_pointer,template_nmi)
+	%set_pointer_rom(!main_pointer,main)
+	%set_pointer_rom(!nmi_pointer,nmi)
+	%set_pointer_rom(!irq_pointer,irq)
 	
 	LDA #$0F
 	STA PPU.screen

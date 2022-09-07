@@ -1,4 +1,4 @@
-dual_controllers_main:
+main:
 	; copy the mirror upward by one row
 	REP #$30
 	LDA #$06BF

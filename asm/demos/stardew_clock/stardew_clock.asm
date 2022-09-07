@@ -1,31 +1,19 @@
-;###########;
-;# Defines #;
-;###########;
+namespace stardew_clock
+
+;########################;
+;# Defines and Includes #;
+;########################;
 
 incsrc "defines.asm"
 
-;############;
-;# Includes #;
-;############;
-
-; include graphics, palettes, etc here if needed
-
 ;########;
-;# Init #;
+;# Code #;
 ;########;
 
 table "table.txt"
 incsrc "init.asm"
-
-;########;
-;# Main #;
-;########;
-
 incsrc "main.asm"
-
-;#######;
-;# NMI #;
-;#######;
-
 incsrc "nmi.asm"
 cleartable
+
+namespace off

@@ -1,4 +1,4 @@
-font_test_init:
+init:
 	PHB
 	PHK
 	PLB

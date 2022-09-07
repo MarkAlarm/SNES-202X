@@ -1,25 +1,19 @@
-;###########;
-;# Defines #;
-;###########;
+namespace menu
+
+;########################;
+;# Defines and Includes #;
+;########################;
 
 incsrc "defines.asm"
 
 ;########;
-;# Init #;
+;# Code #;
 ;########;
 
 table "defines/font_generic_table.txt"
 incsrc "init.asm"
-
-;########;
-;# Main #;
-;########;
-
 incsrc "main.asm"
-
-;#######;
-;# NMI #;
-;#######;
-
 incsrc "nmi.asm"
 cleartable
+
+namespace off

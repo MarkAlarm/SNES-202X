@@ -1,2 +1,2 @@
-template_main:
+main:
 	RTL

@@ -1,4 +1,4 @@
-dual_controllers_init:
+init:
 	PHB
 	PHK
 	PLB

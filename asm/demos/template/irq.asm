@@ -1,2 +1,2 @@
-template_irq:
+irq:
 	RTL

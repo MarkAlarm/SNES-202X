@@ -1,4 +1,4 @@
-stardew_clock_init:
+init:
 	STZ CPU.interrupt_enable
 	LDA #$8F
 	STA PPU.screen

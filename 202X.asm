@@ -73,6 +73,8 @@ org $028000
 	incsrc "asm/demos/stardew_clock/stardew_clock.asm"
 	incsrc "asm/demos/gfx_demo_1/gfx_demo_1.asm"
 	
+	incsrc "asm/demos/template/template.asm"
+	
 	print "Bytes inserted in bank 2: ", bytes, "/32768"
 	
 	pad $02FFFF

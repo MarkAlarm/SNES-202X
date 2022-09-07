@@ -1,4 +1,4 @@
-four_controllers_nmi:
+nmi:
 	REP #$30
 	LDA controller[2].disable
 	EOR #$FFFF

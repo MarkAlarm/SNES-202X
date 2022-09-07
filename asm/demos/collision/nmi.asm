@@ -1,4 +1,4 @@
-collision_nmi:
+nmi:
 	; update OAM
 	STZ PPU.oam_address
 	

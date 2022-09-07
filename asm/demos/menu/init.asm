@@ -1,4 +1,4 @@
-menu_init:
+init:
 	PHB
 	PHK
 	PLB
@@ -36,8 +36,8 @@ menu_init:
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
-	%set_pointer_rom(!main_pointer,menu_main)
-	%set_pointer_rom(!nmi_pointer,menu_nmi)
+	%set_pointer_rom(!main_pointer,main)
+	%set_pointer_rom(!nmi_pointer,nmi)
 	
 	LDA #$0F
 	STA PPU.screen
@@ -59,7 +59,7 @@ menu_init:
 	dw " > Option 9      > Option 10    "
 	dw " > Option 11     > Option 12    "
 	dw " > Option 13     > Option 14    "
-	dw " > Option 15     > Null         "
+	dw " > Template      > Null         "
 	dw "                                "
 	dw " Use the d-pad to highlight an  "
 	dw " option, then press start to    "

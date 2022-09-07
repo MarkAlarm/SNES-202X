@@ -1,4 +1,4 @@
-collision_init:
+init:
 	STZ CPU.interrupt_enable
 	LDA #$8F
 	STA PPU.screen
@@ -52,8 +52,8 @@ collision_init:
 	LDA #$5D
 	STA PPU.cgram_data
 
-	%set_pointer_rom(!main_pointer,collision_main)
-	%set_pointer_rom(!nmi_pointer,collision_nmi)
+	%set_pointer_rom(!main_pointer,main)
+	%set_pointer_rom(!nmi_pointer,nmi)
 	
 	LDA #$0F
 	STA PPU.screen

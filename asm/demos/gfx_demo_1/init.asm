@@ -1,4 +1,4 @@
-gfx_demo_1_init:
+init:
 	STZ CPU.interrupt_enable
 	LDA #$8F
 	STA PPU.screen
@@ -47,7 +47,6 @@ gfx_demo_1_init:
 	
 	RTL
 
-; yxpccctt tttttttt
 .init_fg_tilemap
 	incbin "init_tilemap.map"
 	

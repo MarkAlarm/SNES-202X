@@ -1,2 +1,2 @@
-template_nmi:
+nmi:
 	RTL

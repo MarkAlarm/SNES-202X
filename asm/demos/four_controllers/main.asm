@@ -1,4 +1,4 @@
-four_controllers_main:
+main:
 	PHB
 	PHK
 	PLB

@@ -1,4 +1,4 @@
-menu_main:
+main:
 	PHB
 	PHK
 	PLB
@@ -142,4 +142,4 @@ menu_main:
 	dl menu_init,menu_init
 	dl menu_init,menu_init
 	dl menu_init,menu_init
-	dl menu_init,null_pointer
+	dl template_init,null_pointer

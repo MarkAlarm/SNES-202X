@@ -1,25 +1,20 @@
-;###########;
-;# Defines #;
-;###########;
+namespace collision
+
+;########################;
+;# Defines and Includes #;
+;########################;
 
 incsrc "defines.asm"
 
 ;########;
-;# Init #;
+;# Code #;
 ;########;
 
 table "table.txt"
 incsrc "init.asm"
 cleartable
 
-;########;
-;# Main #;
-;########;
-
 incsrc "main.asm"
-
-;#######;
-;# NMI #;
-;#######;
-
 incsrc "nmi.asm"
+
+namespace off

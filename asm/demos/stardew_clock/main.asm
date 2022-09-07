@@ -1,4 +1,4 @@
-stardew_clock_main:
+main:
 	PHB
 	PHK
 	PLB

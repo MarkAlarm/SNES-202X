@@ -1,4 +1,4 @@
-menu_nmi:
+nmi:
 	PHB
 	PHK
 	PLB

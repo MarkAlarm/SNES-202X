@@ -1,19 +1,14 @@
+namespace font_test
+
 ;########;
-;# Init #;
+;# Code #;
 ;########;
 
 table "defines/font_generic_table.txt"
 incsrc "init.asm"
 cleartable
 
-;########;
-;# Main #;
-;########;
-
 incsrc "main.asm"
-
-;#######;
-;# NMI #;
-;#######;
-
 incsrc "nmi.asm"
+
+namespace off

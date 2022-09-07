@@ -1,11 +1,11 @@
-gfx_demo_1_nmi:
+nmi:
 	PHB
 	PHK
 	PLB
 	
 	LDA !frame_counter_low
 	LSR #3
-	AND #$07
+	AND #$03
 	ASL
 	TAX
 	

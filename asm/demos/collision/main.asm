@@ -7,7 +7,7 @@
 ; collide bottom
 
 
-collision_main:
+main:
 	PHB
 	PHK
 	PLB
