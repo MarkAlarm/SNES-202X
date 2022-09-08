@@ -3,6 +3,18 @@ nmi:
 	PHK
 	PLB
 	
+	; animate background color
+	LDA !frame_counter_low
+	LSR #4
+	ASL
+	TAX
+	
+	STZ PPU.cgram_address
+	LDA .bg_colors,x
+	STA PPU.cgram_data
+	LDA .bg_colors+1,x
+	STA PPU.cgram_data
+	
 	; update the previous option (clear highlight)
 	LDA !menu_previous_option
 	ASL
@@ -106,6 +118,28 @@ nmi:
 	
 	PLB
 	RTL
+	
+.bg_colors
+	!counter = $00
+	!color = $0000
+	
+	while !counter < $08
+		dw !color
+		!color #= !color+%0000100000000001
+		!counter #= !counter+1
+	endif
+	
+	while !counter < $10
+		dw !color
+		!color #= !color-%0000100000000001
+		!counter #= !counter+1
+	endif
+
+	; 0 00000 00000 00000
+	; 0bbbbbgg gggrrrrr
+	; add 0 00010 00000 00001
+	
+	; %0000100000000001
 
 .option_vram_strips
 	dw $5080,$5090,$50A0,$50B0,$50C0,$50D0,$50E0,$50F0

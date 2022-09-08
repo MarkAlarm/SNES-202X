@@ -5,7 +5,7 @@ nmi:
 	
 	LDA !frame_counter_low
 	LSR #3
-	AND #$03
+	AND #$07
 	ASL
 	TAX
 	

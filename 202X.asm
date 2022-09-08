@@ -59,21 +59,12 @@ org $018000
 	print "Bytes inserted in bank 1: ", bytes, "/32768"
 	
 	pad $01FFFF
-
-; various code demos
+	
 org $028000
 	reset bytes
 	
 	incsrc "asm/demos/menu/menu.asm"
-	
-	incsrc "asm/demos/collision/collision.asm"
-	incsrc "asm/demos/dual_controllers/dual_controllers.asm"
-	incsrc "asm/demos/four_controllers/four_controllers.asm"
 	incsrc "asm/demos/font_test/font_test.asm"
-	incsrc "asm/demos/stardew_clock/stardew_clock.asm"
-	incsrc "asm/demos/gfx_demo_1/gfx_demo_1.asm"
-	
-	incsrc "asm/demos/template/template.asm"
 	
 	print "Bytes inserted in bank 2: ", bytes, "/32768"
 	
@@ -82,20 +73,45 @@ org $028000
 org $038000
 	reset bytes
 	
+	incsrc "asm/demos/collision/collision.asm"
+	
 	print "Bytes inserted in bank 3: ", bytes, "/32768"
 	
 	pad $03FFFF
 	
 org $048000
+	reset bytes
+	
+	incsrc "asm/demos/dual_controllers/dual_controllers.asm"
+	incsrc "asm/demos/four_controllers/four_controllers.asm"
+	
+	print "Bytes inserted in bank 4: ", bytes, "/32768"
+	
 	pad $04FFFF
 	
 org $058000
+	reset bytes
+	
+	incsrc "asm/demos/stardew_clock/stardew_clock.asm"
+	
+	print "Bytes inserted in bank 5: ", bytes, "/32768"
+	
 	pad $05FFFF
 	
 org $068000
+	reset bytes
+	
+	incsrc "asm/demos/gfx_demo_1/gfx_demo_1.asm"
+	
+	print "Bytes inserted in bank 6: ", bytes, "/32768"
+	
 	pad $06FFFF
 	
 org $078000
+	reset bytes
+	
+	print "Bytes inserted in bank 7: ", bytes, "/32768"
+	
 	pad $07FFFF
 	
 org $088000

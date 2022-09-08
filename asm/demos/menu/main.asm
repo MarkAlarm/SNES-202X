@@ -142,4 +142,4 @@ main:
 	dl menu_init,menu_init
 	dl menu_init,menu_init
 	dl menu_init,menu_init
-	dl template_init,null_pointer
+	dl menu_init,null_pointer
