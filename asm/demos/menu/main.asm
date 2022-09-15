@@ -138,7 +138,7 @@ main:
 	dl collision_init,dual_controllers_init
 	dl font_test_init,four_controllers_init
 	dl stardew_clock_init,menu_init
-	dl gfx_demo_1_init,menu_init
+	dl gfx_demo_1_init,math_init
 	dl menu_init,menu_init
 	dl menu_init,menu_init
 	dl menu_init,menu_init

@@ -1,8 +1,4 @@
 init:
-	PHB
-	PHK
-	PLB
-	
 	STZ CPU.interrupt_enable
 	LDA #$8F
 	STA PPU.screen
@@ -13,9 +9,9 @@ init:
 	LDA #$09
 	STA PPU.background_mode
 	
-	LDA.b #($4000>>8)|$00
+	LDA.b #($4000>>9)|$00
 	STA PPU.layer_1_tilemap
-	LDA.b #($4800>>8)|$00
+	LDA.b #($4800>>9)|$00
 	STA PPU.layer_2_tilemap
 	LDA.b #($5000>>8)|$00
 	STA PPU.layer_3_tilemap
@@ -29,43 +25,50 @@ init:
 	STA PPU.main_screen
 	STA PPU.sub_screen
 	
-	STZ !menu_current_option
-	STZ !menu_previous_option
+	LDA #$01
+	STA !lcg_rng_input
+	STZ !lcg_rng_output
 	
+	REP #$20
+	STZ !lcg_rng_index
+	SEP #$20
+	
+	%vram_fill($00,$0000,$0000,0)
 	%upload_2bpp_gfx(generic_font,$3000)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%wram_write(.init_tilemap,!layer_3_mirror,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
+	
 	%set_pointer_rom(!main_pointer,main)
 	%set_pointer_rom(!nmi_pointer,nmi)
+	%set_pointer_rom(!irq_pointer,irq)
 	
 	LDA #$0F
 	STA PPU.screen
 	LDA #$81
 	STA CPU.interrupt_enable
 	
-	PLB
 	RTL
 
 .init_tilemap
 	dw "                                "
-	dw " Various SNES Tech Demos - 202X "
-	dw "          By MarkAlarm          "
+	dw "     Various Math Functions     "
 	dw "                                "
-	dw " > Collision     > 2 Controllers"
-	dw " > Font Test     > 4 Controllers"
-	dw " > Stardew Clock > Inventory    "
-	dw " > GFX Demo 1    > Math         "
-	dw " > Option 9      > Option 10    "
-	dw " > Option 11     > Option 12    "
-	dw " > Option 13     > Option 14    "
-	dw " > Template      > Null         "
+	dw " A: $XXXXXXXX | 4294967295      "
+	dw " B: $XXXXXXXX | 4294967295      "
 	dw "                                "
-	dw " Use the d-pad to highlight an  "
-	dw " option, then press start to    "
-	dw " enter the demo. Hold select to "
-	dw " display a brief description    "
-	dw " about the highlighted demo.    "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
 	dw "                                "
 	dw "                                "
 	dw "                                "
