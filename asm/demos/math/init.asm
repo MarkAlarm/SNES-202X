@@ -25,13 +25,7 @@ init:
 	STA PPU.main_screen
 	STA PPU.sub_screen
 	
-	LDA #$01
-	STA !lcg_rng_input
-	STZ !lcg_rng_output
-	
-	REP #$20
-	STZ !lcg_rng_index
-	SEP #$20
+	STZ !math_current_option
 	
 	%vram_fill($00,$0000,$0000,0)
 	%upload_2bpp_gfx(generic_font,$3000)
@@ -51,22 +45,22 @@ init:
 	RTL
 
 .init_tilemap
-	dw "                                "
 	dw "     Various Math Functions     "
 	dw "                                "
 	dw " A8:        $XX |        nnn    "
 	dw " A16:     $XXXX |      nnnnn    "
-	dw " A32: $XXXXXXXX | nnnnnnnnnn    "
-	dw "                                "
 	dw " B8:        $XX |        nnn    "
 	dw " B16:     $XXXX |      nnnnn    "
-	dw " B32: $XXXXXXXX | nnnnnnnnnn    "
 	dw "                                "
 	dw " O8:        $XX |        nnn    "
 	dw " O16:     $XXXX |      nnnnn    "
 	dw " O32: $XXXXXXXX | nnnnnnnnnn    "
 	dw "                                "
-	dw " Unary Ops       Binary Ops     "
+	dw " DPad + A/B: Change A/B values  "
+	dw " DPad + X: Change menu option   "
+	dw " Start: Execute operation       "
+	dw "                                "
+	dw " Select an operation to execute "
 	dw " > Sine          > Add          "
 	dw " > Cosine        > Subtract     "
 	dw " > Tangent       > Multiply     "
@@ -74,7 +68,7 @@ init:
 	dw " > Arccos        > Modulo       "
 	dw " > Arctan        > ---          "
 	dw " > Square Root   > ---          "
-	dw " > Randomize     > ---          "
+	dw " > Inverse SQRT  > Randomize    "
 	dw "                                "
 	dw "                                "
 	dw "                                "
