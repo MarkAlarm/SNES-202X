@@ -56,7 +56,7 @@ init:
 	dw " > Font Test     > 4 Controllers"
 	dw " > Stardew Clock > Inventory    "
 	dw " > GFX Demo 1    > Math         "
-	dw " > Option 9      > Option 10    "
+	dw " > Option 9      > T-D Collision"
 	dw " > Option 11     > Option 12    "
 	dw " > Option 13     > Option 14    "
 	dw " > Template      > Null         "

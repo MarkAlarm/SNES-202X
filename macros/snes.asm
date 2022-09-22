@@ -211,3 +211,24 @@ macro oam_mirror_clear()
 	PLP
 endmacro
 
+macro oam_update(channel)
+	PHP
+	
+	STZ PPU.oam_address
+	
+	REP #$20
+	
+	LDA #$0400
+	STA DMA[<channel>].settings
+	LDA #!OAM_start
+	STA DMA[<channel>].source_word
+	LDY.b #!OAM_start>>16
+	STY DMA[<channel>].source_bank
+	LDA #$0220
+	STA DMA[<channel>].size
+	
+	LDY #$01<<(<channel>)
+	STY CPU.enable_dma
+	
+	PLP
+endmacro
