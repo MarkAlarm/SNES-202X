@@ -1,21 +1,19 @@
-namespace math
+namespace top_down_collision
 
 ;########################;
 ;# Defines and Includes #;
 ;########################;
 
 incsrc "defines.asm"
-; include graphics, palettes, etc here if needed
+player: incbin "graphics/top_down_collision/player.bin"
+tileset: incbin "graphics/top_down_collision/tileset.bin"
 
 ;########;
 ;# Code #;
 ;########;
 
-table "table.txt"
 incsrc "init.asm"
 incsrc "main.asm"
-cleartable
-
 incsrc "nmi.asm"
 incsrc "irq.asm"
 

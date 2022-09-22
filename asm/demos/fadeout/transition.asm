@@ -1,4 +1,4 @@
-namespace math
+namespace transition
 
 ;########################;
 ;# Defines and Includes #;
@@ -11,11 +11,8 @@ incsrc "defines.asm"
 ;# Code #;
 ;########;
 
-table "table.txt"
 incsrc "init.asm"
 incsrc "main.asm"
-cleartable
-
 incsrc "nmi.asm"
 incsrc "irq.asm"
 

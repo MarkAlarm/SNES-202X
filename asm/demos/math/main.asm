@@ -193,6 +193,7 @@ main:
 	LDA !math_a+1
 	AND #$0F
 	STA !layer_3_mirror+$00D8
+	
 	LDA !math_a
 	LSR #4
 	STA !layer_3_mirror+$00DA
@@ -209,6 +210,7 @@ main:
 	LDA !math_b+1
 	AND #$0F
 	STA !layer_3_mirror+$0158
+	
 	LDA !math_b
 	LSR #4
 	STA !layer_3_mirror+$015A
@@ -219,15 +221,151 @@ main:
 	STA !layer_3_mirror+$011C
 	
 	; display o
+	LDA !math_o+3
+	LSR #4
+	STA !layer_3_mirror+$024E
+	LDA !math_o+3
+	AND #$0F
+	STA !layer_3_mirror+$0250
+	
+	LDA !math_o+2
+	LSR #4
+	STA !layer_3_mirror+$0252
+	LDA !math_o+2
+	AND #$0F
+	STA !layer_3_mirror+$0254
+	
+	LDA !math_o+1
+	LSR #4
+	STA !layer_3_mirror+$0256
+	STA !layer_3_mirror+$0216
+	LDA !math_o+1
+	AND #$0F
+	STA !layer_3_mirror+$0258
+	STA !layer_3_mirror+$0218
+	
+	LDA !math_o
+	LSR #4
+	STA !layer_3_mirror+$025A
+	STA !layer_3_mirror+$021A
+	STA !layer_3_mirror+$01DA
+	LDA !math_o
+	AND #$0F
+	STA !layer_3_mirror+$025C
+	STA !layer_3_mirror+$021C
+	STA !layer_3_mirror+$01DC
+	
+	; display description
+	LDA !math_current_option
+	ASL
+	TAX
+	
+	REP #$30
+	LDA ..operator_descriptions,x
+	STA !scratch_0
+	SEP #$10
+	
+	LDX #$00
+	LDY #$00
+	
+	-
+	LDA (!scratch_0),y
+	STA !layer_3_mirror+$0640,x
+	
+	INX #2
+	INY #2
+	CPY #$80
+	BCC -
+	SEP #$30
 	
 	RTS
+	
+..operator_descriptions
+	; dw ...sine_description,...add_description
+	; dw ...cosine_description,...subtract_description
+	; dw ...tangent_description,...multiply_description
+	; dw ...arcsin_description,...divide_description
+	; dw ...arccos_description,...modulo_description
+	; dw ...arctan_description,...empty_description
+	; dw ...square_root_description,...empty_description
+	; dw ...inverse_sqrt_description,...randomize_description
+	dw ...todo_description,...todo_description
+	dw ...todo_description,...todo_description
+	dw ...todo_description,...todo_description
+	dw ...todo_description,...todo_description
+	dw ...todo_description,...todo_description
+	dw ...todo_description,...empty_description
+	dw ...todo_description,...empty_description
+	dw ...todo_description,...todo_description
+
+...sine_description
+	dw " sin(A8) = O16                  "
+	dw "                                "
+
+...add_description
+	dw "                                "
+	dw "                                "
+	
+...cosine_description
+	dw " cos(A8) = O16                  "
+	dw "                                "
+	
+...subtract_description
+	dw "                                "
+	dw "                                "
+	
+...tangent_description
+	dw " tan(A8) = O16                  "
+	dw "                                "
+	
+...multiply_description
+	dw "                                "
+	dw "                                "
+	
+...arcsin_description
+	dw " arcsin(A16) = O8               "
+	dw "                                "
+	
+...divide_description
+	dw "                                "
+	dw "                                "
+	
+...arccos_description
+	dw " arccos(A16) = O8               "
+	dw "                                "
+	
+...modulo_description
+	dw "                                "
+	dw "                                "
+	
+...arctan_description
+	dw " arctan(A16) = O8               "
+	dw "                                "
+	
+...square_root_description
+	dw " sqrt(A16) = O8                 "
+	dw "                                "
+	
+...inverse_sqrt_description
+	dw "                                "
+	dw "                                "
+	
+...randomize_description
+	dw " randomize(A8) = O8             "
+	dw "                                "
+	
+...empty_description
+	dw "                                "
+	dw "                                "
+	
+...todo_description
+	dw " Description of operation here  "
+	dw " <op>(<parameters>) = O<size>   "
 	
 .execute_operation
 	LDA controller[0].low_pressed
 	AND #$10
 	BEQ +
-	
-	WDM #$42
 	
 	LDA !math_current_option
 	ASL
@@ -264,81 +402,7 @@ main:
 ...arctan
 ...square_root
 ...inverse_sqrt
-	RTS
-	
 ...randomize
-	LDA #$69
-	STA !math_o
-	
 ...empty
 	RTS
 	
-..operator_descriptions
-	dw ...sine_description,...add_description
-	dw ...cosine_description,...subtract_description
-	dw ...tangent_description,...multiply_description
-	dw ...arcsin_description,...divide_description
-	dw ...arccos_description,...modulo_description
-	dw ...arctan_description,...empty_description
-	dw ...square_root_description,...empty_description
-	dw ...inverse_sqrt_description,...randomize_description
-
-...sine_description
-	dw " sin(A8) = O16                  "
-	dw "                                "
-
-...add_description
-	dw "                                "
-	dw "                                "
-	
-...cosine_description
-	dw " cos(A8) = O16                  "
-	dw "                                "
-	
-...subtract_description
-	dw "                                "
-	dw "                                "
-	
-...tangent_description
-	dw " tan(A8) = O16                  "
-	dw "                                "
-	
-...multiply_description
-	dw "                                "
-	dw "                                "
-	
-...arcsin_description
-	dw " arcsin(A16) = O8               "
-	dw "                                "
-	
-...divide_description
-	dw "                                "
-	dw "                                "
-	
-...arccos_description
-	dw " arcsos(A16) = O8               "
-	dw "                                "
-	
-...modulo_description
-	dw "                                "
-	dw "                                "
-	
-...arctan_description
-	dw " arctan(A16) = O8               "
-	dw "                                "
-	
-...square_root_description
-	dw " sqrt(A16) = O8                 "
-	dw "                                "
-	
-...inverse_sqrt_description
-	dw "                                "
-	dw "                                "
-	
-...randomize_description
-	dw " randomize(A16) = O16           "
-	dw "                                "
-	
-...empty_description
-	dw "                                "
-	dw "                                "

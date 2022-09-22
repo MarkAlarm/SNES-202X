@@ -74,6 +74,7 @@ org $038000
 	reset bytes
 	
 	incsrc "asm/demos/collision/collision.asm"
+	incsrc "asm/demos/top_down_collision/top_down_collision.asm"
 	
 	print "Bytes inserted in bank 3: ", bytes, "/32768"
 	
