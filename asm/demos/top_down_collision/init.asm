@@ -28,7 +28,7 @@ init:
 	; initialize player stuff
 	REP #$20
 	
-	LDA #$4000
+	LDA #$7C00
 	STA !player_x_pos
 	LDA #$8000
 	STA !player_y_pos
@@ -39,6 +39,9 @@ init:
 	SEP #$20
 	
 	STZ !player_blocked
+	
+	; initialize map
+	%wram_write(.init_fg_collision,!collision_interaction_table,$0380,0)
 	
 	; update vram
 	%vram_fill($00,$0000,$0000,0)

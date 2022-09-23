@@ -13,12 +13,22 @@
 !player_y_spd = $0126
 	!player_y_spd_frac = $0126
 	!player_y_spd_low = $0127
-	
-!player_blocked = $0128		; c---udlr
 
+!player_direction = $0128	; ----udlr
+!player_blocked = $0129		; c---udlr
 
+!player_tile_index = $012E
+
+!collision_interaction_table = $7FC000
 
 !player_width = $06
 !player_height = $06
 !player_x_offset = $01
 !player_y_offset = $01
+
+!player_x_left = !player_x_offset
+!player_x_middle = !player_x_offset+!player_width/2
+!player_x_right = !player_x_offset+!player_width
+!player_y_top = !player_y_offset
+!player_y_middle = !player_y_offset+!player_height/2
+!player_y_bottom = !player_y_offset+!player_height
