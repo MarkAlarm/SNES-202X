@@ -1,11 +1,10 @@
-...one_way_down
-	JSR .move_x
-
-	LDA !player_direction
-	AND #$04
-	BEQ +
+..one_way_down
+	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
 	
-	JSR .move_y
-	
-	+
+...within
+...left
+...right
+...up
+...down
 	RTS
+	

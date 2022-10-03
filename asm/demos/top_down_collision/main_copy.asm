@@ -4,13 +4,7 @@ main:
 	PLB
 	
 	JSR .player_gfx
-	
-	LDA controller[0].low_held
-	AND #$0F
-	STA !player_direction
-	
-	JSR .interact_x
-	JSR .interact_y
+	JSR .interact
 	
 	PLB
 	RTL
@@ -66,8 +60,11 @@ main:
 	db $60,$63,$66,$69		; udl-
 	db $61,$64,$67,$6A		; udlr
 
-.interact_x
-	LDA !player_direction
+.interact
+	LDA controller[0].low_held
+	AND #$0F
+	STA !player_direction
+	
 	AND #$03
 	TAY
 	
@@ -92,6 +89,7 @@ main:
 	REP #$30
 	ASL #2
 	CLC : ADC !scratch_0
+	STA !player_tile_index
 	TAX
 	SEP #$20
 	
@@ -101,16 +99,8 @@ main:
 	ASL
 	TAX
 	
-	%wdm()
-	
-	LDA !player_direction
-	AND #$03
-	ASL
-	TAY
-	
 	REP #$20
-	LDA .tiles,x
-	CLC : ADC ..things,y
+	LDA ..tiles,x
 	STA !scratch_0
 	SEP #$30
 	
@@ -120,69 +110,9 @@ main:
 	db !player_x_middle,!player_x_right,!player_x_left,!player_x_middle
 	
 ..y_checks
-	db !player_y_middle,!player_y_middle,!player_y_middle,!player_y_middle
-	
-..things
-	dw $0000,$0003,$0006,$0000
-	
-.interact_y
-	LDA !player_direction
-	AND #$03
-	TAY
-	
-	LDA !player_x_pos_low
-	CLC : ADC ..x_checks,y
-	AND #$F8
-	LSR #3
-	STA !scratch_0
-	STZ !scratch_1
-	
-	LDA !player_direction
-	AND #$0C
-	LSR #2
-	TAY
-	
-	LDA #$00
-	XBA
-	LDA !player_y_pos_low
-	CLC : ADC ..y_checks,y
-	AND #$F8
-	
-	REP #$30
-	ASL #2
-	CLC : ADC !scratch_0
-	TAX
-	SEP #$20
-	
-	LDA #$00
-	XBA
-	LDA !collision_interaction_table,x
-	ASL
-	TAX
-	
-	%wdm()
-	
-	LDA !player_direction
-	AND #$0C
-	LSR
-	TAY
-	
-	REP #$20
-	LDA .tiles,x
-	CLC : ADC ..things,y
-	STA !scratch_0
-	SEP #$30
-	
-	JMP.w (!scratch_0)
-	
-..x_checks
-	db !player_x_middle,!player_x_middle,!player_x_middle,!player_x_middle
-	
-..y_checks
 	db !player_y_middle,!player_y_bottom,!player_y_top,!player_y_middle
 	
-..things
-	dw $0000,$0009,$000C,$0000
+incsrc "tiles/tiles.asm"
 	
 .move_x
 	LDA !player_direction
@@ -222,4 +152,3 @@ main:
 	dw !npsp,!npsp,!npsp,!npsp
 	dw $0000,$0000,$0000,$0000
 	
-incsrc "tiles/tiles.asm"

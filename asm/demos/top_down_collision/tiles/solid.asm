@@ -1,16 +1,10 @@
-...solid
-	LDA !player_direction
-	AND #$03
-	BNE +
+..solid
+	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
 	
-	JSR .move_x
-
-	+
-	LDA !player_direction
-	AND #$0C
-	BNE +
-	
-	JSR .move_y
-	
-	+
+...within
+...left
+...right
+...up
+...down
 	RTS
+	
