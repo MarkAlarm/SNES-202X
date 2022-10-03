@@ -21,10 +21,10 @@
 
 !collision_interaction_table = $7FC000
 
-!player_width = $06
-!player_height = $06
-!player_x_offset = $01
-!player_y_offset = $01
+!player_width = $08
+!player_height = $08
+!player_x_offset = $00
+!player_y_offset = $00
 
 !player_x_left = !player_x_offset
 !player_x_middle = !player_x_offset+!player_width/2
@@ -32,3 +32,6 @@
 !player_y_top = !player_y_offset
 !player_y_middle = !player_y_offset+!player_height/2
 !player_y_bottom = !player_y_offset+!player_height
+
+!pbsp = $0100
+!npsp = $10000-!pbsp

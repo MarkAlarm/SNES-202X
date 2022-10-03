@@ -4,7 +4,7 @@ main:
 	PLB
 	
 	JSR .player_gfx
-	JSR .move
+	JSR .interact
 	
 	PLB
 	RTL
@@ -42,7 +42,6 @@ main:
 	
 	RTS
 	
-	
 ..anim_tiles
 	db $61,$64,$67,$6A		; ----
 	db $62,$65,$68,$6B		; ---r
@@ -61,8 +60,11 @@ main:
 	db $60,$63,$66,$69		; udl-
 	db $61,$64,$67,$6A		; udlr
 
-.move
+.interact
 	LDA controller[0].low_held
+	AND #$0F
+	STA !player_direction
+	
 	AND #$03
 	TAY
 	
@@ -73,7 +75,7 @@ main:
 	STA !scratch_0
 	STZ !scratch_1
 	
-	LDA controller[0].low_held
+	LDA !player_direction
 	AND #$0C
 	LSR #2
 	TAY
@@ -89,23 +91,20 @@ main:
 	CLC : ADC !scratch_0
 	STA !player_tile_index
 	TAX
-	SEP #$30
+	SEP #$20
 	
-	LDA controller[0].low_held
-	AND #$0F
-	STA !player_direction
+	LDA #$00
+	XBA
+	LDA !collision_interaction_table,x
+	ASL
 	TAX
 	
-	LDA ..x_movements,x
-	CLC : ADC !player_x_pos_low
-	STA !player_x_pos_low
+	REP #$20
+	LDA ..tiles,x
+	STA !scratch_0
+	SEP #$30
 	
-	LDA ..y_movements,x
-	CLC : ADC !player_y_pos_low
-	STA !player_y_pos_low
-	
-	+
-	RTS
+	JMP.w (!scratch_0)
 	
 ..x_checks
 	db !player_x_middle,!player_x_right,!player_x_left,!player_x_middle
@@ -113,15 +112,43 @@ main:
 ..y_checks
 	db !player_y_middle,!player_y_bottom,!player_y_top,!player_y_middle
 	
+incsrc "tiles/tiles.asm"
+	
+.move_x
+	LDA !player_direction
+	ASL
+	TAX
+	
+	REP #$20
+	LDA ..x_movements,x
+	CLC : ADC !player_x_pos
+	STA !player_x_pos
+	SEP #$20
+	
+	RTS
+	
 ..x_movements
-	db $00,$01,$FF,$00
-	db $00,$01,$FF,$00
-	db $00,$01,$FF,$00
-	db $00,$01,$FF,$00
-
+	dw $0000,!pbsp,!npsp,$0000
+	dw $0000,!pbsp,!npsp,$0000
+	dw $0000,!pbsp,!npsp,$0000
+	dw $0000,!pbsp,!npsp,$0000
+	
+.move_y
+	LDA !player_direction
+	ASL
+	TAX
+	
+	REP #$20
+	LDA ..y_movements,x
+	CLC : ADC !player_y_pos
+	STA !player_y_pos
+	SEP #$20
+	
+	RTS
+	
 ..y_movements
-	db $00,$00,$00,$00
-	db $01,$01,$01,$01
-	db $FF,$FF,$FF,$FF
-	db $00,$00,$00,$00
+	dw $0000,$0000,$0000,$0000
+	dw !pbsp,!pbsp,!pbsp,!pbsp
+	dw !npsp,!npsp,!npsp,!npsp
+	dw $0000,$0000,$0000,$0000
 	

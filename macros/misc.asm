@@ -35,3 +35,7 @@ endmacro
 macro upload_palette(source)
 	%cgram_write(<source>,$00,$0200,0)
 endmacro
+
+macro wdm()
+	WDM #$42
+endmacro
