@@ -3,12 +3,11 @@ main:
 	PHK
 	PLB
 	
-	JSR .player_gfx
-	
 	LDA controller[0].low_held
 	AND #$0F
 	STA !player_direction
 	
+	JSR .player_gfx
 	JSR .interact_x
 	JSR .interact_y
 	
@@ -101,8 +100,6 @@ main:
 	ASL
 	TAX
 	
-	%wdm()
-	
 	LDA !player_direction
 	AND #$03
 	ASL
@@ -123,7 +120,7 @@ main:
 	db !player_y_middle,!player_y_middle,!player_y_middle,!player_y_middle
 	
 ..things
-	dw $0000,$0003,$0006,$0000
+	dw $0000,$000C,$0009,$0000
 	
 .interact_y
 	LDA !player_direction
@@ -160,8 +157,6 @@ main:
 	ASL
 	TAX
 	
-	%wdm()
-	
 	LDA !player_direction
 	AND #$0C
 	LSR
@@ -182,7 +177,7 @@ main:
 	db !player_y_middle,!player_y_bottom,!player_y_top,!player_y_middle
 	
 ..things
-	dw $0000,$0009,$000C,$0000
+	dw $0000,$0003,$0006,$0000
 	
 .move_x
 	LDA !player_direction

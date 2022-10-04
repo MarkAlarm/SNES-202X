@@ -1,15 +1,19 @@
-..one_way_down
+..post
 	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
 	
 ...within
-	RTS
 ...north
-	JSR .move_y
 	RTS
 ...south
+	LDA controller[0].high_pressed
+	AND #$80
+	BEQ +
+	
+	; read sign here
+	
+	+
 	RTS
 ...east
 ...west
-	JSR .move_x
 	RTS
 	

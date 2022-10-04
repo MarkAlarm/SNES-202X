@@ -1,10 +1,14 @@
 ..one_way_left
-	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
+	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
 	
 ...within
-...left
-...right
-...up
-...down
+	RTS
+...north
+...south
+	JSR .move_y
+	RTS
+...east
+	JSR .move_x
+...west
 	RTS
 	

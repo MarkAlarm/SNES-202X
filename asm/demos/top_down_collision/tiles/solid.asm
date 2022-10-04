@@ -1,10 +1,10 @@
 ..solid
-	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
+	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
 	
 ...within
-...left
-...right
-...up
-...down
+...north
+...south
+...east
+...west
 	RTS
 	

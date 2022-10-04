@@ -1,16 +1,16 @@
 ..empty
-	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
+	JMP ...within : JMP ...up : JMP ...down : JMP ...left : JMP ...right
 	
 ...within
-	RTS
-	
-...left
-...right
-	JSR .move_x
 	RTS
 	
 ...up
 ...down
 	JSR .move_y
+	RTS
+	
+...left
+...right
+	JSR .move_x
 	RTS
 	

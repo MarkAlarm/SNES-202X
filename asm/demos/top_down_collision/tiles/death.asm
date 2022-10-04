@@ -1,11 +1,11 @@
 ..death
-	JMP ...within : JMP ...left : JMP ...right : JMP ...up : JMP ...down
+	JMP ...within : JMP ...up : JMP ...down : JMP ...left : JMP ...right
 	
 ...within
-...left
-...right
 ...up
 ...down
+...left
+...right
 	%set_pointer_rom(!main_pointer,init)
 	RTS
 	
