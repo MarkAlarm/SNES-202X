@@ -59,7 +59,7 @@ init:
 	dw " > Option 9      > T-D Collision"
 	dw " > Option 11     > Option 12    "
 	dw " > Option 13     > Option 14    "
-	dw " > Template      > Null         "
+	dw " > Option 15     > Null         "
 	dw "                                "
 	dw " Use the d-pad to highlight an  "
 	dw " option, then press start to    "

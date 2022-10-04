@@ -159,8 +159,8 @@ nmi:
 	dw ..collision_description,..dual_controllers_description
 	dw ..font_test_description,..four_controllers_description
 	dw ..stardew_clock_description,..inventory_description
-	dw ..gfx_demo_1_description,..unused_option_description
-	dw ..unused_option_description,..unused_option_description
+	dw ..gfx_demo_1_description,..math_description
+	dw ..unused_option_description,..top_down_collision_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..null_description
@@ -205,7 +205,19 @@ nmi:
 	dw " Graphics demo that uses 4BPP   "
 	dw " color and 8x8 tiles. This also "
 	dw " includes some basic tile       "
-	dw " animations.             [TODO] "
+	dw " animations.              [WIP] "
+	
+..math_description
+	dw " Demo for a few math functions  "
+	dw " that would be useful for game  "
+	dw " calculations, including an RNG "
+	dw " function.               [TODO] "
+	
+..top_down_collision_description
+	dw " A simple top-down collision    "
+	dw " test with a full tile system,  "
+	dw " built with unique N/S/E/W      "
+	dw " interactions.            [WIP] "
 	
 ..unused_option_description
 	dw " An unused option that as of    "
