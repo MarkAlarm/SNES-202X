@@ -9,7 +9,7 @@
 	AND #$80
 	BEQ +
 	
-	; read sign here
+	%set_pointer_rom(!main_pointer,menu_init)
 	
 	+
 	RTS
