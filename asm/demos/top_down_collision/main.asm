@@ -94,6 +94,7 @@ main:
 	REP #$30
 	ASL #2
 	CLC : ADC !scratch_0
+	STA !player_tile_index
 	TAX
 	SEP #$20
 	
@@ -151,6 +152,7 @@ main:
 	REP #$30
 	ASL #2
 	CLC : ADC !scratch_0
+	STA !player_tile_index
 	TAX
 	SEP #$20
 	
