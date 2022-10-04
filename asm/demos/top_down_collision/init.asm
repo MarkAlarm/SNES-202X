@@ -38,6 +38,8 @@ init:
 	
 	SEP #$20
 	
+	STZ !player_dir_move
+	STZ !player_dir_face
 	STZ !player_blocked
 	
 	; initialize map

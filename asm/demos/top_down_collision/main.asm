@@ -5,8 +5,11 @@ main:
 	
 	LDA controller[0].low_held
 	AND #$0F
-	STA !player_direction
+	STA !player_dir_move
+	BEQ +
+	STA !player_dir_face
 	
+	+
 	JSR .player_gfx
 	JSR .interact_x
 	JSR .interact_y
@@ -27,7 +30,7 @@ main:
 	LSR #3
 	AND #$03
 	STA !scratch_0
-	LDA !player_direction
+	LDA !player_dir_face
 	ASL #2
 	CLC : ADC !scratch_0
 	TAX
@@ -66,7 +69,7 @@ main:
 	db $61,$64,$67,$6A		; udlr
 
 .interact_x
-	LDA !player_direction
+	LDA !player_dir_face
 	AND #$03
 	TAY
 	
@@ -77,7 +80,7 @@ main:
 	STA !scratch_0
 	STZ !scratch_1
 	
-	LDA !player_direction
+	LDA !player_dir_face
 	AND #$0C
 	LSR #2
 	TAY
@@ -100,7 +103,7 @@ main:
 	ASL
 	TAX
 	
-	LDA !player_direction
+	LDA !player_dir_face
 	AND #$03
 	ASL
 	TAY
@@ -123,7 +126,7 @@ main:
 	dw $0000,$000C,$0009,$0000
 	
 .interact_y
-	LDA !player_direction
+	LDA !player_dir_move
 	AND #$03
 	TAY
 	
@@ -134,7 +137,7 @@ main:
 	STA !scratch_0
 	STZ !scratch_1
 	
-	LDA !player_direction
+	LDA !player_dir_face
 	AND #$0C
 	LSR #2
 	TAY
@@ -157,7 +160,7 @@ main:
 	ASL
 	TAX
 	
-	LDA !player_direction
+	LDA !player_dir_face
 	AND #$0C
 	LSR
 	TAY
@@ -180,7 +183,7 @@ main:
 	dw $0000,$0003,$0006,$0000
 	
 .move_x
-	LDA !player_direction
+	LDA !player_dir_move
 	ASL
 	TAX
 	
@@ -199,7 +202,7 @@ main:
 	dw $0000,!pbsp,!npsp,$0000
 	
 .move_y
-	LDA !player_direction
+	LDA !player_dir_move
 	ASL
 	TAX
 	

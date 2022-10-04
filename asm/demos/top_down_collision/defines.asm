@@ -14,8 +14,9 @@
 	!player_y_spd_frac = $0126
 	!player_y_spd_low = $0127
 
-!player_direction = $0128	; ----udlr
-!player_blocked = $0129		; c---udlr
+!player_dir_move = $0128	; ----udlr
+!player_dir_face = $0129	; ----udlr 
+!player_blocked = $012A		; c---udlr
 
 !player_tile_index = $012E
 
