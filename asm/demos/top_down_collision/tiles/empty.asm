@@ -1,16 +1,9 @@
 ..empty
-	JMP ...within : JMP ...up : JMP ...down : JMP ...left : JMP ...right
+	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
 	
 ...within
+...north
+...south
+...east
+...west
 	RTS
-	
-...up
-...down
-	JSR .move_y
-	RTS
-	
-...left
-...right
-	JSR .move_x
-	RTS
-	

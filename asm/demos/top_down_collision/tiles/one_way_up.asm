@@ -3,13 +3,14 @@
 	
 ...within
 	RTS
+	
 ...north
+	LDA #$08
+	TSB !player_blocked
 	RTS
+	
 ...south
-	JSR .move_y
-	RTS
 ...east
 ...west
-	JSR .move_x
 	RTS
 	

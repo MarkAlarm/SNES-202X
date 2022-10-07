@@ -1,10 +1,20 @@
 ..post
 	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
-	
+
 ...within
-...north
+	LDA #$80
+	TSB !player_blocked
 	RTS
+	
+...north
+	LDA #$04
+	TSB !player_blocked
+	RTS
+	
 ...south
+	LDA #$08
+	TSB !player_blocked
+	
 	LDA controller[0].high_pressed
 	AND #$80
 	BEQ +
@@ -13,7 +23,14 @@
 	
 	+
 	RTS
+	
 ...east
+	LDA #$02
+	TSB !player_blocked
+	RTS
+	
 ...west
+	LDA #$01
+	TSB !player_blocked
 	RTS
 	

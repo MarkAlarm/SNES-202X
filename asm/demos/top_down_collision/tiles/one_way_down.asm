@@ -2,14 +2,15 @@
 	JMP ...within : JMP ...north : JMP ...south : JMP ...east : JMP ...west
 	
 ...within
-	RTS
 ...north
-	JSR .move_y
 	RTS
+	
 ...south
+	LDA #$04
+	TSB !player_blocked
 	RTS
+	
 ...east
 ...west
-	JSR .move_x
 	RTS
 	

@@ -3,6 +3,8 @@ main:
 	PHK
 	PLB
 	
+	STZ !player_blocked
+	
 	LDA controller[0].low_held
 	AND #$0F
 	STA !player_dir_move
@@ -11,8 +13,50 @@ main:
 	
 	+
 	JSR .player_gfx
+	
+	; 0 to 339
+	LDA PPU.latch
+	LDA PPU.horizontal_scanline
+	STA !ppu_h
+	LDA PPU.horizontal_scanline
+	STA !ppu_h+1
+	
+	; 0 to 261 (more important one)
+	LDA PPU.vertical_scanline
+	STA !ppu_v
+	LDA PPU.vertical_scanline
+	STA !ppu_v+1
+	
 	JSR .interact_x
 	JSR .interact_y
+	
+	LDA !player_blocked
+	AND #$03
+	BNE +
+	JSR .move_x
+	
+	+
+	LDA !player_blocked
+	AND #$0C
+	BNE +
+	JSR .move_y
+	
+	+
+	LDA PPU.latch
+	LDA PPU.horizontal_scanline
+	SEC : SBC !ppu_h
+	STA !ppu_h
+	LDA PPU.horizontal_scanline
+	SEC : SBC !ppu_h+1
+	STA !ppu_h+1
+	LDA PPU.vertical_scanline
+	SEC : SBC !ppu_v
+	STA !ppu_v
+	LDA PPU.vertical_scanline
+	SEC : SBC !ppu_v+1
+	STA !ppu_v+1
+	
+	JSR .ppu_gfx
 	
 	PLB
 	RTL
@@ -67,6 +111,27 @@ main:
 	db $62,$65,$68,$6B		; ud-r
 	db $60,$63,$66,$69		; udl-
 	db $61,$64,$67,$6A		; udlr
+	
+.ppu_gfx
+	LDY #$04
+	
+	LDA !ppu_h
+	STA !OAM_x,y
+	LDA !ppu_v
+	STA !OAM_y,y
+	LDA #$40
+	STA !OAM_tile,y
+	LDA #$3A
+	STA !OAM_props,y
+	
+	TYA
+	LSR #2
+	TAY
+	
+	LDA #$02
+	STA !OAM_size,y
+	
+	RTS
 
 .interact_x
 	LDA !player_dir_face
@@ -75,13 +140,11 @@ main:
 	
 	LDA !player_x_pos_low
 	CLC : ADC ..x_checks,y
-	AND #$F8
 	LSR #3
 	STA !scratch_0
 	STZ !scratch_1
 	
 	LDA !player_dir_face
-	AND #$0C
 	LSR #2
 	TAY
 	
@@ -111,7 +174,7 @@ main:
 	
 	REP #$20
 	LDA .tiles,x
-	CLC : ADC ..things,y
+	CLC : ADC ..pointer_offsets,y
 	STA !scratch_0
 	SEP #$30
 	
@@ -123,7 +186,7 @@ main:
 ..y_checks
 	db !player_y_middle,!player_y_middle,!player_y_middle,!player_y_middle
 	
-..things
+..pointer_offsets
 	dw $0000,$000C,$0009,$0000
 	
 .interact_y
@@ -133,13 +196,11 @@ main:
 	
 	LDA !player_x_pos_low
 	CLC : ADC ..x_checks,y
-	AND #$F8
 	LSR #3
 	STA !scratch_0
 	STZ !scratch_1
 	
 	LDA !player_dir_face
-	AND #$0C
 	LSR #2
 	TAY
 	
@@ -169,7 +230,7 @@ main:
 	
 	REP #$20
 	LDA .tiles,x
-	CLC : ADC ..things,y
+	CLC : ADC ..pointer_offsets,y
 	STA !scratch_0
 	SEP #$30
 	
@@ -181,7 +242,7 @@ main:
 ..y_checks
 	db !player_y_middle,!player_y_bottom,!player_y_top,!player_y_middle
 	
-..things
+..pointer_offsets
 	dw $0000,$0003,$0006,$0000
 	
 .move_x
@@ -221,5 +282,8 @@ main:
 	dw !pbsp,!pbsp,!pbsp,!pbsp
 	dw !npsp,!npsp,!npsp,!npsp
 	dw $0000,$0000,$0000,$0000
+	
+.destroy_tile
+	RTS
 	
 incsrc "tiles/tiles.asm"

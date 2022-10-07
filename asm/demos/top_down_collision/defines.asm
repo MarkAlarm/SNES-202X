@@ -20,6 +20,9 @@
 
 !player_tile_index = $012E
 
+!ppu_h = $0130
+!ppu_v = $0132
+
 !collision_interaction_table = $7FC000
 
 !player_width = $08
