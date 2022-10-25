@@ -112,6 +112,7 @@ org $078000
 	reset bytes
 	
 	incsrc "asm/demos/math/math.asm"
+	incsrc "asm/demos/brainfuck/brainfuck.asm"
 	
 	print "Bytes inserted in bank 7: ", bytes, "/32768"
 	

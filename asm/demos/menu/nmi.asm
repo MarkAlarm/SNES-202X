@@ -160,8 +160,8 @@ nmi:
 	dw ..font_test_description,..four_controllers_description
 	dw ..stardew_clock_description,..inventory_description
 	dw ..gfx_demo_1_description,..math_description
-	dw ..unused_option_description,..top_down_collision_description
-	dw ..unused_option_description,..unused_option_description
+	dw ..sprites_description,..top_down_collision_description
+	dw ..brainfuck_description,..unused_option_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..null_description
 	
@@ -213,11 +213,23 @@ nmi:
 	dw " calculations, including an RNG "
 	dw " function.               [TODO] "
 	
+..sprites_description
+	dw " An implementation of a sprite  "
+	dw " system, complete with tile,    "
+	dw " sprite-sprite, and player      "
+	dw " interaction.            [TODO] "
+	
 ..top_down_collision_description
 	dw " A simple top-down collision    "
 	dw " test with a full tile system,  "
 	dw " built with unique N/S/E/W      "
 	dw " interactions.            [WIP] "
+	
+..brainfuck_description
+	dw " An interpreter and editor for  "
+	dw " the brainfuck programming      "
+	dw " language, written on the SNES  "
+	dw " for some reason.        [TODO] "
 	
 ..unused_option_description
 	dw " An unused option that as of    "
