@@ -555,7 +555,41 @@ main:
 	RTS
 	
 ...loop_start
+	SEP #$20
+	
+	LDX !bf_arr_run_index
+	LDA !bf_array,x
+	BNE +
+	
+	LDX !bf_ins_run_index
+	-
+	INX
+	LDA !bf_ins_raw,x
+	CMP #$08
+	BNE -
+	
+	STX !bf_ins_run_index
+	
+	+
 	RTS
 	
 ...loop_end
+	SEP #$20
+	
+	LDX !bf_arr_run_index
+	LDA !bf_array,x
+	BEQ +
+	
+	LDX !bf_ins_run_index
+	
+	-
+	DEX
+	LDA !bf_ins_raw,x
+	CMP #$07
+	BNE -
+	
+	DEX
+	STX !bf_ins_run_index
+	
+	+
 	RTS

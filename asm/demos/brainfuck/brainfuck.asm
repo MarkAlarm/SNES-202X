@@ -11,7 +11,7 @@ font: incbin "font.bin"
 ;# Code #;
 ;########;
 
-table "table.txt"
+table "ascii-table.txt"
 
 incsrc "init.asm"
 incsrc "main.asm"

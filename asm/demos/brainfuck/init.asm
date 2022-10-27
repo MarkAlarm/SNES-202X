@@ -46,6 +46,8 @@ init:
 	%wram_fill($20,!bf_out_raw,$0080,0)
 	%wram_fill($00,!bf_array,$0400,0)
 	
+	%wram_write(.init_program,!bf_ins_raw,(.init_program_end-.init_program),0)
+	
 	%vram_fill($00,$0000,$0000,0)
 	%cgram_fill($00,$00,$0200,0)
 	%vram_write(font,$3000,$1000,0)
@@ -97,3 +99,16 @@ init:
 	dw "                                "
 	dw "                                "
 	dw "                                "
+
+pushtable
+
+table "bf-table.txt"
+.init_program
+	db "++++++++++[>+>+++>+++++++>++++++"
+	db "++++<<<<-]>>>++.>+.+++++++..+++."
+	db "<<++.>+++++++++++++++.>.+++.----"
+	db "--.--------.<<+.<"
+..end
+
+pulltable
+
