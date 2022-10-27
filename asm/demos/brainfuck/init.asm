@@ -31,9 +31,23 @@ init:
 	STA PPU.main_screen
 	STA PPU.sub_screen
 	
+	REP #$20
+	STZ !bf_ins_edit_index
+	STZ !bf_dat_edit_index
+	STZ !bf_ins_runtime_index
+	STZ !bf_arr_runtime_index
+	SEP #$20
+	
+	STZ !bf_edit_mode
+	
+	%wram_fill($00,!bf_ins_raw,$0200,0)
+	%wram_fill($00,!bf_dat_raw,$0040,0)
+	%wram_fill($00,!bf_out_raw,$0080,0)
+	%wram_fill($00,!bf_array,$0400,0)
+	
 	%vram_fill($00,$0000,$0000,0)
 	%cgram_fill($00,$00,$0200,0)
-	%upload_2bpp_gfx(font,$3000)
+	%vram_write(font,$3000,$1000,0)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
 	
@@ -88,29 +102,29 @@ init:
 	dw "                                "
 
 .init_ins_disp
-	dw "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "i                              i"
-	dw "iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii"
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "
 	
 .init_dat_disp
-	dw "dddddddddddddddddddddddddddddddd"
-	dw "d                              d"
+	dw "                                "
+	dw "                                "
 	
 .init_out_disp
-	dw "oooooooooooooooooooooooooooooooo"
-	dw "o                              o"
-	dw "o                              o"
-	dw "oooooooooooooooooooooooooooooooo"
+	dw "                                "
+	dw "                                "
+	dw "                                "
+	dw "                                "

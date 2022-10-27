@@ -3,7 +3,7 @@
 !bf_ins_runtime_index = $0124	; index within code processing
 !bf_arr_runtime_index = $0126	; index within data processing
 
-!bf_edit_mode = $0127			; 0 = code, 1 = input
+!bf_edit_mode = $0127			; 0 = code, 1 (rather, not 0) = input
 
 !bf_ins_raw = $7E3000			; 512 bytes of code
 !bf_dat_raw = $7E3200			; 64 bytes of data
@@ -14,24 +14,6 @@
 !bf_out_disp = $7E4480
 
 !bf_array = $7F0000				; 1024 bytes of data buffer (not 30,000)
-
-; code
-; 512 bytes of code "+-<>[],."
-; display is 1024 bytes
-
-; data
-; 64 bytes of data (anything 20-7E)
-; display is 128 bytes
-
-; output
-; 128 bytes of data (00-FF)
-; display is 256 bytes
-
-; array
-; 1024 bytes
-
-
-
 
 ; ok maybe this
 ; L/R to change the code/input
