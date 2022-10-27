@@ -3,14 +3,15 @@ main:
 	PHK
 	PLB
 	
-	JSR .process_buttons
+	JSR .process_P1
+	JSR .process_P2
 	JSR .prep_disp
 	
 	PLB
 	
 	RTL
 	
-.process_buttons
+.process_P1
 	; handle moving the index around the code/data menus
 	LDA controller[0].low_pressed
 	STA !scratch_0
@@ -152,7 +153,10 @@ main:
 	BRA ++++
 	
 	+++
-	LDA controller[0].high_pressed
+	LDA !frame_counter
+	AND #$03
+	BNE +
+	LDA controller[0].high_held
 	AND #$10
 	BEQ +
 	
@@ -164,7 +168,10 @@ main:
 	SEP #$10
 	
 	+
-	LDA controller[0].high_pressed
+	LDA !frame_counter
+	AND #$03
+	BNE +
+	LDA controller[0].high_held
 	AND #$20
 	BEQ ++++
 	
@@ -178,19 +185,24 @@ main:
 	++++
 	; handle menu swap and code execution
 	LDA !scratch_0
-	AND #$20
-	BEQ +
-	LDA !bf_edit_mode
-	EOR #$01
-	STA !bf_edit_mode
-	
-	+
-	LDA !scratch_0
 	AND #$10
 	BEQ +
 	JMP .execute_code
 	
 	+
+	LDA !scratch_0
+	AND #$20
+	BEQ +
+	
+	LDA !bf_edit_mode
+	EOR #$01
+	STA !bf_edit_mode
+	
+	+
+	RTS
+	
+.process_P2
+	
 	RTS
 
 .prep_disp
@@ -293,8 +305,132 @@ main:
 	RTS
 	
 ..ins_chars
-	dw " +-<>[],."
+	dw "_><+-.,[]"
 	
 .execute_code
-	; lol
+	STZ !bf_edit_mode
+
+	REP #$20
+	STZ !bf_ins_edit_index
+	STZ !bf_dat_edit_index
+	STZ !bf_ins_run_index
+	STZ !bf_arr_run_index
+	SEP #$20
+	
+	STZ !bf_inp_run_index
+	STZ !bf_out_run_index
+	
+	%wram_fill($00,!bf_array,$0400,0)
+	
+	; code processing here
+	%wdm()
+	
+	-
+	REP #$30
+	LDX !bf_ins_run_index
+	LDA !bf_ins_raw,x
+	AND #$00FF
+	ASL
+	TAX
+	
+	JSR (..ins_table,x)
+	
+	REP #$30
+	
+	LDA !bf_ins_run_index
+	INC
+	STA !bf_ins_run_index
+	CMP #$0200
+	BCC -
+	
+	SEP #$30
+	
+	RTS
+	
+..ins_table
+	dw ...nop
+	dw ...inc_ptr
+	dw ...dec_ptr
+	dw ...inc_dat
+	dw ...dec_dat
+	dw ...dat_out
+	dw ...dat_in
+	dw ...loop_start
+	dw ...loop_end
+	
+...nop
+	RTS
+	
+...inc_ptr
+	LDA !bf_arr_run_index
+	INC
+	AND #$01FF
+	STA !bf_arr_run_index
+	RTS
+	
+...dec_ptr
+	LDA !bf_arr_run_index
+	DEC
+	AND #$01FF
+	STA !bf_arr_run_index
+	RTS
+	
+...inc_dat
+	SEP #$20
+	LDX !bf_arr_run_index
+	LDA !bf_array,x
+	INC
+	STA !bf_array,x
+	RTS
+	
+...dec_dat
+	SEP #$20
+	LDX !bf_arr_run_index
+	LDA !bf_array,x
+	DEC
+	STA !bf_array,x
+	RTS
+	
+...dat_out
+	SEP #$30
+	
+	LDY !bf_out_run_index
+	BMI +
+	
+	REP #$10
+	LDX !bf_arr_run_index
+	LDA !bf_array,x
+	SEP #$10
+	TYX
+	STA !bf_out_raw,x
+	
+	INC !bf_out_run_index
+	
+	+
+	RTS
+	
+...dat_in
+	SEP #$30
+	
+	LDA !bf_inp_run_index
+	CMP #$40
+	BCS +
+	
+	LDX !bf_inp_run_index
+	LDA !bf_dat_raw,x
+	
+	REP #$10
+	LDX !bf_arr_run_index
+	STA !bf_array,x
+	SEP #$10
+	
+	INC !bf_inp_run_index
+	
+	+
+	RTS
+	
+...loop_start
+	RTS
+	
+...loop_end
 	RTS

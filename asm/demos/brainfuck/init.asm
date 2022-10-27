@@ -3,8 +3,6 @@ init:
 	PHK
 	PLB
 	
-	%wdm()
-	
 	STZ CPU.interrupt_enable
 	LDA #$8F
 	STA PPU.screen
@@ -34,9 +32,12 @@ init:
 	REP #$20
 	STZ !bf_ins_edit_index
 	STZ !bf_dat_edit_index
-	STZ !bf_ins_runtime_index
-	STZ !bf_arr_runtime_index
+	STZ !bf_ins_run_index
+	STZ !bf_arr_run_index
 	SEP #$20
+	
+	STZ !bf_inp_run_index
+	STZ !bf_out_run_index
 	
 	STZ !bf_edit_mode
 	
@@ -50,10 +51,6 @@ init:
 	%vram_write(font,$3000,$1000,0)
 	%vram_write(.init_tilemap,$5000,$0700,0)
 	%cgram_write(smw_palette,$00,$0200,0)
-	
-	%wram_write(.init_ins_disp,!bf_ins_disp,$0400,0)
-	%wram_write(.init_dat_disp,!bf_dat_disp,$0080,0)
-	%wram_write(.init_out_disp,!bf_out_disp,$0100,0)
 	
 	%vram_write(!bf_ins_disp,$5080,$0400,0)
 	%vram_write(!bf_dat_disp,$52A0,$0080,0)
@@ -96,34 +93,6 @@ init:
 	dw "                                "
 	dw "                                "
 	dw "----------- <Output> -----------"
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-
-.init_ins_disp
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	dw "                                "
-	
-.init_dat_disp
-	dw "                                "
-	dw "                                "
-	
-.init_out_disp
 	dw "                                "
 	dw "                                "
 	dw "                                "
