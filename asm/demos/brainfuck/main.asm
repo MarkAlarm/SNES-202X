@@ -202,7 +202,131 @@ main:
 	RTS
 	
 .process_P2
+	REP #$20
+	LDA controller[1].pressed
+	STA !scratch_0
+	SEP #$20
 	
+	; left = <
+	LDA !scratch_1
+	AND #$02
+	BEQ +
+	LDA #$02
+	BRA ++
+	
+	; right = >
+	+
+	LDA !scratch_1
+	AND #$01
+	BEQ +
+	LDA #$01
+	BRA ++
+	
+	; up = +
+	+
+	LDA !scratch_1
+	AND #$08
+	BEQ +
+	LDA #$03
+	BRA ++
+	
+	; down = -
+	+
+	LDA !scratch_1
+	AND #$04
+	BEQ +
+	LDA #$04
+	BRA ++
+	
+	; A = ]
+	+
+	LDA !scratch_0
+	AND #$80
+	BEQ +
+	LDA #$08
+	BRA ++
+	
+	; B = .
+	+
+	LDA !scratch_1
+	AND #$80
+	BEQ +
+	LDA #$05
+	BRA ++
+	
+	; X = [
+	+
+	LDA !scratch_0
+	AND #$40
+	BEQ +
+	LDA #$07
+	BRA ++
+	
+	; Y = ,
+	+
+	LDA !scratch_1
+	AND #$40
+	BEQ +++
+	LDA #$06
+	
+	++
+	REP #$10
+	LDX !bf_ins_edit_index
+	STA !bf_ins_raw,x
+	
+	REP #$20
+	LDA !bf_ins_edit_index
+	INC
+	AND #$01FF
+	STA !bf_ins_edit_index
+	SEP #$30
+	
+	; L = move backward 1
+	+++
+	LDA !scratch_0
+	AND #$20
+	BEQ +
+	
+	REP #$20
+	LDA !bf_ins_edit_index
+	DEC
+	AND #$01FF
+	STA !bf_ins_edit_index
+	SEP #$20
+	
+	; R = move forward 1
+	+
+	LDA !scratch_0
+	AND #$10
+	BEQ +
+	
+	REP #$20
+	LDA !bf_ins_edit_index
+	INC
+	AND #$01FF
+	STA !bf_ins_edit_index
+	SEP #$20
+	
+	; select = clear
+	+
+	LDA !scratch_1
+	AND #$20
+	BEQ +
+	
+	REP #$10
+	LDX !bf_ins_edit_index
+	LDA #$00
+	STA !bf_ins_raw,x
+	SEP #$10
+	
+	; start = execute
+	+
+	LDA !scratch_1
+	AND #$10
+	BEQ +
+	JMP .execute_code
+	
+	+
 	RTS
 
 .prep_disp
@@ -321,6 +445,7 @@ main:
 	STZ !bf_out_run_index
 	
 	%wram_fill($00,!bf_array,$0400,0)
+	%wram_fill($20,!bf_out_raw,$0080,0)
 	
 	; code processing here
 	%wdm()

@@ -17,9 +17,26 @@
 
 !bf_array = $7F0000				; 1024 bytes of data buffer (not 30,000)
 
-; ok maybe this
+; control scheme idea
+
+; _><+-.,[]
+
 ; player 1
 ; L/R to change the code/input
 ; start to execute code
 ; select to swap between code and input
 ; dpad to move within the editor/input bar
+
+; player 2
+; left = <
+; right = >
+; up = +
+; down = -
+; A = ]
+; B = .
+; X = [
+; Y = ,
+; L = move back 1
+; R = move forward 1
+; select = clear
+; start = execute

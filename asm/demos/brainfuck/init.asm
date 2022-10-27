@@ -43,7 +43,7 @@ init:
 	
 	%wram_fill($00,!bf_ins_raw,$0200,0)
 	%wram_fill($00,!bf_dat_raw,$0040,0)
-	%wram_fill($00,!bf_out_raw,$0080,0)
+	%wram_fill($20,!bf_out_raw,$0080,0)
 	%wram_fill($00,!bf_array,$0400,0)
 	
 	%vram_fill($00,$0000,$0000,0)
