@@ -5,6 +5,7 @@
 !bf_inp_run_index = $0128		; index for input processing
 !bf_out_run_index = $0129		; index for output processing
 
+!bf_loop_depth = $012E
 !bf_edit_mode = $012F			; 0 = code, 1 (rather, not 0) = input
 
 !bf_ins_raw = $7E3000			; 512 bytes of code
