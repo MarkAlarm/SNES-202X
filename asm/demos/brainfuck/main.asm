@@ -254,20 +254,20 @@ main:
 	LDA #$05
 	BRA ++
 	
-	; X = [
+	; X = ,
 	+
 	LDA !scratch_0
 	AND #$40
 	BEQ +
-	LDA #$07
+	LDA #$06
 	BRA ++
 	
-	; Y = ,
+	; Y = [
 	+
 	LDA !scratch_1
 	AND #$40
 	BEQ +++
-	LDA #$06
+	LDA #$07
 	
 	++
 	REP #$10

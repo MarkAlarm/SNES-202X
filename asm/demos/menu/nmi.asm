@@ -161,7 +161,7 @@ nmi:
 	dw ..stardew_clock_description,..inventory_description
 	dw ..gfx_demo_1_description,..math_description
 	dw ..sprites_description,..top_down_collision_description
-	dw ..brainfuck_description,..unused_option_description
+	dw ..brainfuck_description,..dungeon_description
 	dw ..unused_option_description,..unused_option_description
 	dw ..unused_option_description,..null_description
 	
@@ -224,6 +224,12 @@ nmi:
 	dw " test with a full tile system,  "
 	dw " built with unique N/S/E/W      "
 	dw " interactions.            [WIP] "
+
+..dungeon_description
+	dw " RNG rogue dungeon explorer     "
+	dw " with complete movement system  "
+	dw " and room to develop items      "
+	dw "                          [WIP] "
 	
 ..brainfuck_description
 	dw " An interpreter and editor for  "

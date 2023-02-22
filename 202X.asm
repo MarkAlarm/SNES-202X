@@ -119,6 +119,12 @@ org $078000
 	pad $07FFFF
 	
 org $088000
+	reset bytes
+	
+	incsrc "asm/demos/dungeon/dungeon.asm"
+	
+	print "Bytes inserted in bank 8: ", bytes, "/32768"
+
 	pad $08FFFF
 	
 org $098000

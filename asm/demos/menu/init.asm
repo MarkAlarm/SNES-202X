@@ -57,7 +57,7 @@ init:
 	dw " > Stardew Clock > Inventory    "
 	dw " > GFX Demo 1    > Math         "
 	dw " > Sprites       > T-D Collision"
-	dw " > Brainfuck     > Option 12    "
+	dw " > Brainfuck     > Dungeon [WIP]"
 	dw " > Option 13     > Option 14    "
 	dw " > Option 15     > Null         "
 	dw "                                "

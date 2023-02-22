@@ -4,6 +4,7 @@ main:
 	PLB
 	
 	JSR .highlight_option
+	JSR .execute_operation_operators_randomize
 	
 	LDA !frame_counter_low
 	AND #$03
@@ -402,7 +403,25 @@ main:
 ...arctan
 ...square_root
 ...inverse_sqrt
+	RTS
+
 ...randomize
+	LDY #$08
+	LDA !math_rng_seed
+	ADC !frame_counter_low
+	-
+	ASL
+	ROL !math_rng_seed+1
+	BCC +
+	EOR #$39
+	+
+	DEY
+	BNE -
+	STA !math_rng_seed
+	STA !math_o
+
+	RTS
+
 ...empty
 	RTS
 	
